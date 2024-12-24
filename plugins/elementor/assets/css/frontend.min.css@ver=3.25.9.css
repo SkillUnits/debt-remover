@@ -2328,7 +2328,7 @@ body.rtl .e-con {
 }
 
 
-.swiper {
+/* .swiper {
   width: 100%;
   height: 200px;
   max-width: 380px;
@@ -2424,7 +2424,7 @@ body.rtl .e-con {
 }
 .debt-block p {
   margin: 0;
-}
+} */
 
 .elementor-tab-content {
   max-height: 0; /* Start with zero height */
