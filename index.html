@@ -417,6 +417,7 @@
 	<link rel='stylesheet' id='customerbullseye-css' href='themes/elementor-child/style.css@ver=1.03.css' media='all' />
 	<link rel='stylesheet' id='hello-elementor-css' href='themes/hello-elementor/style.min.css@ver=3.1.1.css'
 		media='all' />
+	<link rel='stylesheet' href="themes/css/style.css" media='all' />
 	<link rel='stylesheet' id='hello-elementor-theme-style-css'
 		href='themes/hello-elementor/theme.min.css@ver=3.1.1.css' media='all' />
 	<link rel='stylesheet' id='elementor-frontend-css'
@@ -1780,16 +1781,18 @@ const results = {};
 						<div class="elementor-toggle">
 							<div class="elementor-toggle-item">
 								<div id="elementor-tab-title-1131" class="elementor-tab-title" data-tab="1"
-									role="button" aria-controls="elementor-tab-content-1131" aria-expanded="false">
+									role="button" aria-controls="elementor-tab-content-1131" aria-expanded="false" onclick="toggleContent('elementor-tab-content-1131', this)">
 									<span class="elementor-toggle-icon elementor-toggle-icon-right" aria-hidden="true">
-										<span class="elementor-toggle-icon-closed"><svg
+										<span class="elementor-toggle-icon-closed">
+											<svg
 												class="e-font-icon-svg e-fas-chevron-down" viewBox="0 0 448 512"
 												xmlns="http://www.w3.org/2000/svg">
 												<path
 													d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
 												</path>
 											</svg></span>
-										<span class="elementor-toggle-icon-opened"><svg
+										<span class="elementor-toggle-icon-opened" style="display: none;">
+											<svg
 												class="elementor-toggle-icon-opened e-font-icon-svg e-fas-chevron-up"
 												viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
 												<path
@@ -1801,7 +1804,7 @@ const results = {};
 										80%? </a>
 								</div>
 
-								<div id="elementor-tab-content-1131" class="elementor-tab-content elementor-clearfix"
+								<div id="elementor-tab-content-1131" class="elementor-tab-content elementor-clearfix" 
 									data-tab="1" role="region" aria-labelledby="elementor-tab-title-1131">
 									<p>Yes, we’ve already helped 145,769 people save hundreds per month. We use an AI
 										algorithm to reduce your debt by the most amount possible</p>
@@ -1871,6 +1874,34 @@ const results = {};
 						</div>
 					</div>
 				</div>
+				<script>
+					document.querySelectorAll('.elementor-tab-title').forEach(title => {
+						title.addEventListener('click', function () {
+							const tabId = this.id.split('-').pop(); // Extract the unique ID (e.g., '1131')
+							const content = document.getElementById(`elementor-tab-content-${tabId}`);
+							const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+							if (isExpanded) {
+							// When hiding, add a faster transition class
+							content.classList.add('hiding');
+							content.classList.remove('visible');
+
+							// Wait for the transition to complete before removing the 'hiding' class
+							setTimeout(() => content.classList.remove('hiding'), 300); // Match the hiding duration (300ms)
+							} else {
+							// When showing, simply add 'visible'
+							content.classList.remove('hiding'); // Ensure 'hiding' class is not present
+							content.classList.add('visible');
+							}
+
+							// Toggle the aria-expanded attribute
+							this.setAttribute('aria-expanded', !isExpanded);
+
+							// Toggle the active class for the title
+							this.classList.toggle('active', !isExpanded);
+						});
+					});
+				</script>
 				<div class="elementor-element elementor-element-e260f52 elementor-widget elementor-widget-heading"
 					data-id="e260f52" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">

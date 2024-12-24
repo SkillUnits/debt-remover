@@ -1877,6 +1877,34 @@ const results = {};
 						</div>
 					</div>
 				</div>
+				<script>
+					document.querySelectorAll('.elementor-tab-title').forEach(title => {
+						title.addEventListener('click', function () {
+							const tabId = this.id.split('-').pop(); // Extract the unique ID (e.g., '1131')
+							const content = document.getElementById(`elementor-tab-content-${tabId}`);
+							const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+							if (isExpanded) {
+							// When hiding, add a faster transition class
+							content.classList.add('hiding');
+							content.classList.remove('visible');
+
+							// Wait for the transition to complete before removing the 'hiding' class
+							setTimeout(() => content.classList.remove('hiding'), 300); // Match the hiding duration (300ms)
+							} else {
+							// When showing, simply add 'visible'
+							content.classList.remove('hiding'); // Ensure 'hiding' class is not present
+							content.classList.add('visible');
+							}
+
+							// Toggle the aria-expanded attribute
+							this.setAttribute('aria-expanded', !isExpanded);
+
+							// Toggle the active class for the title
+							this.classList.toggle('active', !isExpanded);
+						});
+					});
+				</script>
 				<div class="elementor-element elementor-element-e260f52 elementor-widget elementor-widget-heading"
 					data-id="e260f52" data-element_type="widget" data-widget_type="heading.default">
 					<div class="elementor-widget-container">
